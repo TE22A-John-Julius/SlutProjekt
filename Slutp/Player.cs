@@ -14,52 +14,68 @@ class Player
     public int Hunger = 100;
     public int HungerMax = 100;
     public int Stamina = 100;
-    public Vector2 movement = new Vector2(0.1f,0.1f);
+    public Vector2 movement = new Vector2(0.1f, 0.1f);
+
+    float StaminaSpeed = 0;
+    float StaminaRechargeDelay = 0;
+    float frametime;
+
     public void Update()
     {
-        
+
+        if (Stamina < StaminaMax)
+        {
+
+            StaminaSpeed += Raylib.GetFrameTime();
+
+            if (StaminaSpeed > 1)
+            {
+                StaminaSpeed = 0;
+                Stamina += 1;
+
+            }
+
+
+        }
+
         movement = Vector2.Zero;
 
-        if (Raylib.IsKeyDown(KeyboardKey.D)){
+        if (Raylib.IsKeyDown(KeyboardKey.D))
+        {
             movement.X += 1;
         }
-        else if (Raylib.IsKeyDown(KeyboardKey.A)){
+        else if (Raylib.IsKeyDown(KeyboardKey.A))
+        {
             movement.X -= 1;
         }
-        if (Raylib.IsKeyDown(KeyboardKey.W)){
+        if (Raylib.IsKeyDown(KeyboardKey.W))
+        {
             movement.Y -= 1;
         }
-        else if (Raylib.IsKeyDown(KeyboardKey.S));
+        else if (Raylib.IsKeyDown(KeyboardKey.S)) ;
         {
             movement.Y += 1;
         }
-        if (movement.Length() > 0){
+        if (movement.Length() > 0)
+        {
             movement = Vector2.Normalize(movement) * Speed;
         }
-        
+
         Hitbox.X += (int)movement.X;
         Hitbox.Y += (int)movement.Y;
-
-        // if (Raylib.IsKeyDown(KeyboardKey.A)) Hitbox.X -= Speed;
-        // if (Raylib.IsKeyDown(KeyboardKey.D)) Hitbox.X += Speed;
-        // if (Raylib.IsKeyDown(KeyboardKey.W)) Hitbox.Y -= Speed;
-        // if (Raylib.IsKeyDown(KeyboardKey.S)) Hitbox.Y += Speed;
     }
 
-    public void StamRecharge()
+
+    void StamRecharge()
     {
-        for (int Stamina = 100; Stamina < StaminaMax;)
-        {
-            Stamina +=1;
-            Console.WriteLine("Added 1 stamina stat");
-        }
+
     }
 
     public void Actions()
     {
         if (Raylib.IsMouseButtonPressed(MouseButton.Left))
         {
-            Stamina-=5;
+            Stamina -= 5;
         }
     }
 
@@ -67,21 +83,7 @@ class Player
     {
         Raylib.DrawRectangleRec(Hitbox, Color.Black);
 
-        Raylib.DrawText($"{Stamina}",200,100, 32, Color.Black);
+        Raylib.DrawText($"{Stamina}", 200, 100, 32, Color.Black);
     }
 }
-
-
-
-/* public method (stamina)
-for each second stamina < staminaMax
-stamina += 1
-*/
-
-
-/*public method (action):
-for every action :
--5 stamina
-
-*/
 

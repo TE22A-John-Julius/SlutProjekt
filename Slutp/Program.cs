@@ -9,7 +9,7 @@ while (!Raylib.WindowShouldClose())
 {
     player.Update();
     player.Actions();
-    player.StamRecharge();
+
 
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.DarkBlue);
