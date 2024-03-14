@@ -10,7 +10,6 @@ while (!Raylib.WindowShouldClose())
     player.Update();
     player.Actions();
 
-
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.DarkBlue);
     player.Draw();

@@ -4,25 +4,34 @@ using System.Numerics;
 class Player
 {
     public Rectangle Hitbox = new(360, 250, 80, 20);
+    /*--------------------------------------//Level and EXP//--------------------------------------*/
     public int Level = 1;
     public int ExpMax = 100;
     public int Exp = 0;
+    /*--------------------------------------//Hit Points//--------------------------------------*/
     public int Hp = 200;
     public int HitPointMax = 200;
-    public float Speed = 5;
-    public int StaminaMax = 100;
-    public int Hunger = 100;
+    float HpSpeed = 0;
+    /*--------------------------------------//HUNGER AND THIRST//--------------------------------------*/
+    public int Hunger = 80;
     public int HungerMax = 100;
+    float HungerSpeed = 0;
+    public int Thirst = 80;
+    public int ThirstMax = 80;
+    float ThirstSpeed = 0;
+    /*--------------------------------------//MOVEMENT AND STAM//--------------------------------------*/
     public int Stamina = 100;
     public Vector2 movement = new Vector2(0.1f, 0.1f);
-
     float StaminaSpeed = 0;
-    float StaminaRechargeDelay = 0;
-    float frametime;
-
+    public float Speed = 5;
+    public int StaminaMax = 100;
+    /*_____________________________________________________________________________________
+    --------------------------------------//METHODS//--------------------------------------
+    _______________________________________________________________________________________
+    */
     public void Update()
     {
-
+        /*--------------------------------------//STATS//--------------------------------------*/
         if (Stamina < StaminaMax)
         {
 
@@ -31,13 +40,45 @@ class Player
             if (StaminaSpeed > 1)
             {
                 StaminaSpeed = 0;
-                Stamina += 1;
+                Stamina += 3;
 
             }
-
-
         }
+        if (Thirst <= ThirstMax)
+        {
 
+            ThirstSpeed += Raylib.GetFrameTime();
+
+            if (ThirstSpeed > 5)
+            {
+                ThirstSpeed = 0;
+                Thirst -= 1;
+
+            }
+        }
+        if (Hunger <= HungerMax)
+        {
+
+            HungerSpeed += Raylib.GetFrameTime();
+
+            if (HungerSpeed > 10)
+            {
+                HungerSpeed = 0;
+                Hunger -= 1;
+
+            }
+        }
+        if (Hunger == 0 || Thirst == 0)
+        {
+            HpSpeed += Raylib.GetFrameTime();
+
+            if (HpSpeed > 1)
+            {
+                HpSpeed = 0;
+                Hp -= 10;
+            }
+        }
+        /*--------------------------------------//MOVEMENT//--------------------------------------*/
         movement = Vector2.Zero;
 
         if (Raylib.IsKeyDown(KeyboardKey.D))
@@ -48,7 +89,7 @@ class Player
         {
             movement.X -= 1;
         }
-        if (Raylib.IsKeyDown(KeyboardKey.W))
+        else if (Raylib.IsKeyDown(KeyboardKey.W))
         {
             movement.Y -= 1;
         }
@@ -60,17 +101,9 @@ class Player
         {
             movement = Vector2.Normalize(movement) * Speed;
         }
-
         Hitbox.X += (int)movement.X;
         Hitbox.Y += (int)movement.Y;
     }
-
-
-    void StamRecharge()
-    {
-
-    }
-
     public void Actions()
     {
         if (Raylib.IsMouseButtonPressed(MouseButton.Left))
@@ -78,12 +111,18 @@ class Player
             Stamina -= 5;
         }
     }
-
+    /*_____________________________________________________________________________________
+    --------------------------------------//Drawing//--------------------------------------
+    _______________________________________________________________________________________
+        */
     public void Draw()
     {
         Raylib.DrawRectangleRec(Hitbox, Color.Black);
 
-        Raylib.DrawText($"{Stamina}", 200, 100, 32, Color.Black);
+        Raylib.DrawText($"Stamina: 100/{Stamina}", 100, 100, 20, Color.Black);
+        Raylib.DrawText($"Thirst: 80/{Thirst}", 100, 200, 20, Color.Black);
+        Raylib.DrawText($"Hunger: 80/{Hunger}", 100, 300,20, Color.Black);
+        Raylib.DrawText($"Health: 200/{Hp}", 100, 400, 20, Color.Black);
     }
 }
 
