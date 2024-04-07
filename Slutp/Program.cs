@@ -5,6 +5,7 @@ Raylib.SetTargetFPS(60);
 
 Player player = new();
 
+
 while (!Raylib.WindowShouldClose())
 {
     player.Update();
