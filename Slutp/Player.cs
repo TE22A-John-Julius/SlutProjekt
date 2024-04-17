@@ -3,7 +3,7 @@ using System.Numerics;
 
 class Player
 {
-    public Rectangle Hitbox = new(360, 250, 80, 20);
+    public static Rectangle Hitbox = new(360, 250, 80, 20);
     /*--------------------------------------//Level and EXP//--------------------------------------*/
     public int Level = 1;
     public int ExpMax = 100;
@@ -13,12 +13,13 @@ class Player
     public int HitPointMax = 200;
     float HpSpeed = 0;
     /*--------------------------------------//HUNGER AND THIRST//--------------------------------------*/
-    public int Hunger = 80;
+    public static int Hunger = 80;
     public int HungerMax = 100;
     float HungerSpeed = 0;
     public int Thirst = 80;
     public int ThirstMax = 80;
     float ThirstSpeed = 0;
+    public Rectangle Apple = new(16, 16, 80, 40);
     /*--------------------------------------//MOVEMENT AND STAM//--------------------------------------*/
     public int Stamina = 100;
     public Vector2 movement = new Vector2(0.1f, 0.1f);
@@ -78,25 +79,30 @@ class Player
                 Hp -= 10;
             }
         }
+            
+            
+
+        
         /*--------------------------------------//MOVEMENT//--------------------------------------*/
         movement = Vector2.Zero;
 
-        if (Raylib.IsKeyDown(KeyboardKey.D))
+       if (Raylib.IsKeyDown(KeyboardKey.W))
         {
-            movement.X += 1;
+            movement.Y = -1;
         }
-        else if (Raylib.IsKeyDown(KeyboardKey.A))
+        else if (Raylib.IsKeyDown(KeyboardKey.S))
         {
-            movement.X -= 1;
+            movement.Y = +1;
         }
-        else if (Raylib.IsKeyDown(KeyboardKey.W))
+        if (Raylib.IsKeyDown(KeyboardKey.A))
         {
-            movement.Y -= 1;
+            movement.X = -1;
         }
-        else if (Raylib.IsKeyDown(KeyboardKey.S)) ;
+        else if (Raylib.IsKeyDown(KeyboardKey.D))
         {
-            movement.Y += 1;
+            movement.X = +1;
         }
+        
         if (movement.Length() > 0)
         {
             movement = Vector2.Normalize(movement) * Speed;
@@ -119,10 +125,17 @@ class Player
     {
         Raylib.DrawRectangleRec(Hitbox, Color.Black);
 
-        Raylib.DrawText($"Stamina: 100/{Stamina}", 100, 100, 20, Color.Black);
-        Raylib.DrawText($"Thirst: 80/{Thirst}", 100, 200, 20, Color.Black);
-        Raylib.DrawText($"Hunger: 80/{Hunger}", 100, 300,20, Color.Black);
-        Raylib.DrawText($"Health: 200/{Hp}", 100, 400, 20, Color.Black);
+        Raylib.DrawText($"Stamina: {Stamina}/100", 100, 100, 20, Color.Black);
+        Raylib.DrawText($"Thirst: {Thirst}/80", 100, 200, 20, Color.Black);
+        Raylib.DrawText($"Hunger: {Hunger}/80", 100, 300,20, Color.Black);
+        Raylib.DrawText($"Health: {Hp}/200", 100, 400, 20, Color.Black);
     }
+
+
+
+
+
+
 }
+
 
