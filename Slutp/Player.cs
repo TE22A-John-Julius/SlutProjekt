@@ -19,7 +19,6 @@ class Player
     public int Thirst = 80;
     public int ThirstMax = 80;
     float ThirstSpeed = 0;
-    public Rectangle Apple = new(16, 16, 80, 40);
     /*--------------------------------------//MOVEMENT AND STAM//--------------------------------------*/
     public int Stamina = 100;
     public Vector2 movement = new Vector2(0.1f, 0.1f);
@@ -129,6 +128,8 @@ class Player
         Raylib.DrawText($"Thirst: {Thirst}/80", 100, 200, 20, Color.Black);
         Raylib.DrawText($"Hunger: {Hunger}/80", 100, 300,20, Color.Black);
         Raylib.DrawText($"Health: {Hp}/200", 100, 400, 20, Color.Black);
+        Raylib.DrawRectangle(500, 500, 100, 15, Color.Gray);
+        Raylib.DrawRectangle(500, 500, Stamina, 15, Color.White);
     }
 
 
