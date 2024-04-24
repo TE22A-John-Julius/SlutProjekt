@@ -16,6 +16,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="homelessman_w.png" CopyToOutputDirectory="Always"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="homelessman_s.png" CopyToOutputDirectory="Always"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fire.png" CopyToOutputDirectory="Always"/>
+  </ItemGroup>
+
+
+  <ItemGroup>
     <PackageReference Include="Raylib-cs" Version="6.0.0" />
   </ItemGroup>
 

@@ -40,9 +40,6 @@ for each apple in apples
                 Apples.Remove(Apple);
             }
         }
-
-
-
     }
 
 
