@@ -28,6 +28,7 @@ class Player
     float HpSpeed = 0;
     public static bool Cold = true;
     float ColdDmg = 0;
+    int Temperature = 0; 
     /*--------------------------------------//HUNGER AND THIRST//--------------------------------------*/
 
     public static int Hunger = 80;
@@ -197,15 +198,39 @@ class Player
         {
             Cold = false;
         }
+
         if (Cold)
         {
             ColdDmg += Raylib.GetFrameTime();
             if (ColdDmg > 5)
             {
                 ColdDmg = 0;
-                Hp -= 10;
+                Temperature += 10;
+            }
+
+        }
+        else
+        {
+            ColdDmg += Raylib.GetFrameTime();
+            if (ColdDmg > 2)
+            {
+                ColdDmg = 0;
+                Temperature -= 5;
             }
         }
+        if (Temperature == 100)
+        {
+            Hp -= 10;
+        }
+        // if (Cold)
+        // {
+        //     ColdDmg += Raylib.GetFrameTime();
+        //     if (ColdDmg > 5)
+        //     {
+        //         ColdDmg = 0;
+        //         Hp -= 10;
+        //     }
+        // }
     }
     public void Actions()
     {
@@ -255,6 +280,9 @@ class Player
         Raylib.DrawRectangle(100, 150, Thirst, 15, Color.White);
         Raylib.DrawRectangle(100, 200, Hunger, 15, Color.White);
         Raylib.DrawRectangle(100, 250, Hp, 15, Color.White);
+        Raylib.DrawRectangle(800, 100, 20, 100, Color.Orange);
+        Raylib.DrawRectangle(800, 100, 20, Temperature, Color.SkyBlue);
+
     }
 
 
