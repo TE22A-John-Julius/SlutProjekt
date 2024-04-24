@@ -9,7 +9,7 @@ class Consumables
 
     list of apples
 
-    for each apple in apples
+for each apple in apples
     raylib draw rectangle with vector pos
     
     */
@@ -19,8 +19,8 @@ class Consumables
     bool IsAppleEaten = false;
     float AppleRespawnTimer = 0;
     Random Randomizer = new Random();
-   
-    
+
+
     List<Rectangle> Apples = new List<Rectangle>();
 
     public Consumables()
@@ -40,8 +40,8 @@ class Consumables
                 Apples.Remove(Apple);
             }
         }
-            
-        
+
+
 
     }
 
@@ -54,12 +54,12 @@ class Consumables
         {
             Raylib.DrawRectangleRec(Apples[0], Color.Red);
 
-           /* AppleRespawnTimer += Raylib.GetFrameTime();
-                if ( AppleRespawnTimer < 1)
-                {
-                   Apples.Add(Apple);
+            /* AppleRespawnTimer += Raylib.GetFrameTime();
+                 if ( AppleRespawnTimer < 1)
+                 {
+                    Apples.Add(Apple);
 
-                } */
+                 } */
         }
 
     }

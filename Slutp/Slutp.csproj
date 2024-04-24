@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+  <Content Include="homelessman_a.png" CopyToOutputDirectory="Always"/>
+  </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="homelessman_d.png" CopyToOutputDirectory="Always"/>
   </ItemGroup>
 
   <ItemGroup>
