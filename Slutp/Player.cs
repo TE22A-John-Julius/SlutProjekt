@@ -14,8 +14,10 @@ public class SpriteSheetInfo
 }
 class Player
 {
+    TimeCycle timecycle = new();
     public static Rectangle Hitbox = new(360, 250, 80, 20);
     public static Rectangle warmArea = new(580, 840, 100, 100);
+
     /*--------------------------------------//Level and EXP//--------------------------------------*/
 
     public int Level = 1;
@@ -26,10 +28,14 @@ class Player
     public int Hp = 200;
     public int HitPointMax = 200;
     float HpSpeed = 0;
-    public static bool Cold = true;
+    public static bool Cold = false;
     float ColdDmg = 0;
-    int Temperature = 0; 
+    int Temperature = 0;
     /*--------------------------------------//HUNGER AND THIRST//--------------------------------------*/
+
+    public float BoredTimer = 0;
+    int bored = 0;
+
 
     public static int Hunger = 80;
     public int HungerMax = 100;
@@ -44,6 +50,7 @@ class Player
     float staminaSpeed = 0;
     public float Speed = 5;
     public int StaminaMax = 100;
+
 
     /*--------------------------------------//SpriteSheet & Animation//--------------------------------------*/
 
@@ -101,7 +108,17 @@ class Player
     */
     public void Update()
     {
-        /*--------------------------------------//STATS//--------------------------------------*/
+        /*----- ---------------------------------//STATS//--------------------------------------*/
+        if (bored <= 0)
+        {
+            BoredTimer += Raylib.GetFrameTime();
+            if (BoredTimer >= 5)
+            {
+                BoredTimer = 0;
+                bored += 1;
+            }
+        }
+
         if (Stamina < StaminaMax)
         {
 
@@ -194,34 +211,60 @@ class Player
         Hitbox.X += (int)movement.X;
         Hitbox.Y += (int)movement.Y;
 
-        if (Raylib.CheckCollisionRecs(Hitbox, warmArea))
+        if (timecycle.isNight)
+        {
+            Cold = true;
+            if (Cold)
+            {
+                ColdDmg += Raylib.GetFrameTime();
+                if (ColdDmg > 5)
+                {
+                    ColdDmg = 0;
+                    Temperature -= 10;
+                }
+
+                if (Temperature <= 0){
+
+                    if (ColdDmg > 8)
+                {
+                    ColdDmg = 0;
+                    Hp -= 10;
+                }
+                }
+            }
+        }
+        if (timecycle.isDay)
         {
             Cold = false;
         }
+        // if (Raylib.CheckCollisionRecs(Hitbox, warmArea))
+        // {
+        //     Cold = false;
+        // }
 
-        if (Cold)
-        {
-            ColdDmg += Raylib.GetFrameTime();
-            if (ColdDmg > 5)
-            {
-                ColdDmg = 0;
-                Temperature += 10;
-            }
+        // if (Cold)
+        // {
+        //     ColdDmg += Raylib.GetFrameTime();
+        //     if (ColdDmg > 5)
+        //     {
+        //         ColdDmg = 0;
+        //         Temperature += 10;
+        //     }
 
-        }
-        else
-        {
-            ColdDmg += Raylib.GetFrameTime();
-            if (ColdDmg > 2)
-            {
-                ColdDmg = 0;
-                Temperature -= 5;
-            }
-        }
-        if (Temperature == 100)
-        {
-            Hp -= 10;
-        }
+        // }
+        // else
+        // {
+        //     ColdDmg += Raylib.GetFrameTime();
+        //     if (ColdDmg > 2)
+        //     {
+        //         ColdDmg = 0;
+        //         Temperature -= 5;
+        //     }
+        // }
+        // if (Temperature == 100)
+        // {
+        //     Hp -= 10;
+        // }
         // if (Cold)
         // {
         //     ColdDmg += Raylib.GetFrameTime();

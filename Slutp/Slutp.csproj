@@ -7,25 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-  <Content Include="homelessman_a.png" CopyToOutputDirectory="Always"/>
-  </ItemGroup>
 
   <ItemGroup>
-    <Content Include="homelessman_d.png" CopyToOutputDirectory="Always"/>
+    <Content Include="*.png" CopyToOutputDirectory="Always"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="homelessman_w.png" CopyToOutputDirectory="Always"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="homelessman_s.png" CopyToOutputDirectory="Always"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Fire.png" CopyToOutputDirectory="Always"/>
-  </ItemGroup>
 
 
   <ItemGroup>
